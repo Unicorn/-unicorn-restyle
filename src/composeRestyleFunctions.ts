@@ -1,5 +1,6 @@
 import {StyleSheet, ViewStyle} from 'react-native';
 
+import {AllProps} from './restyleFunctions';
 import {
   RestyleFunctionContainer,
   BaseTheme,
@@ -7,7 +8,6 @@ import {
   RNStyle,
   RestyleFunction,
 } from './types';
-import {AllProps} from './restyleFunctions';
 
 const composeRestyleFunctions = <
   Theme extends BaseTheme,
@@ -28,6 +28,7 @@ const composeRestyleFunctions = <
   const properties = flattenedRestyleFunctions.map(styleFunc => {
     return styleFunc.property;
   });
+
   const propertiesMap = properties.reduce(
     (acc, prop) => ({...acc, [prop]: true}),
     {} as {[key in keyof TProps]: true},

@@ -1,4 +1,3 @@
-import {getThemeValue} from './utilities';
 import {
   BaseTheme,
   Dimensions,
@@ -7,6 +6,7 @@ import {
   RNStyleProperty,
   StyleTransformFunction,
 } from './types';
+import {getThemeValue} from './utilities';
 import {getResponsiveValue} from './utilities/getResponsiveValue';
 
 const getMemoizedMapHashKey = (

@@ -1,8 +1,10 @@
-import {TextStyle, FlexStyle, ViewStyle} from 'react-native';
+/** @format */
 
-import createRestyleFunction from './createRestyleFunction';
-import {BaseTheme, ResponsiveValue, RNStyleProperty} from './types';
-import {getKeys} from './typeHelpers';
+import { TextStyle, FlexStyle, ViewStyle } from 'react-native'
+
+import createRestyleFunction from './createRestyleFunction'
+import { BaseTheme, ResponsiveValue, RNStyleProperty } from './types'
+import { getKeys } from './typeHelpers'
 
 const spacingProperties = {
   margin: true,
@@ -26,7 +28,7 @@ const spacingProperties = {
   columnGap: true,
   rowGap: true,
   gap: true,
-};
+}
 
 const spacingPropertiesShorthand = {
   m: 'margin',
@@ -50,7 +52,7 @@ const spacingPropertiesShorthand = {
   g: 'gap',
   rg: 'rowGap',
   cg: 'columnGap',
-};
+}
 
 const typographyProperties = {
   fontSize: true,
@@ -67,7 +69,7 @@ const typographyProperties = {
   textTransform: true,
   verticalAlign: true,
   writingDirection: true,
-};
+}
 
 const layoutProperties = {
   width: true,
@@ -88,7 +90,7 @@ const layoutProperties = {
   flexGrow: true,
   flexShrink: true,
   flexWrap: true,
-};
+}
 
 const positionProperties = {
   position: true,
@@ -98,7 +100,7 @@ const positionProperties = {
   left: true,
   start: true,
   end: true,
-};
+}
 
 const borderProperties = {
   borderBottomWidth: true,
@@ -109,7 +111,7 @@ const borderProperties = {
   borderStartWidth: true,
   borderEndWidth: true,
   borderWidth: true,
-};
+}
 
 const borderRadiusProperties = {
   borderRadius: true,
@@ -121,7 +123,7 @@ const borderRadiusProperties = {
   borderBottomEndRadius: true,
   borderTopStartRadius: true,
   borderTopEndRadius: true,
-};
+}
 
 const borderColorProperties = {
   borderColor: true,
@@ -131,30 +133,30 @@ const borderColorProperties = {
   borderBottomColor: true,
   borderStartColor: true,
   borderEndColor: true,
-};
+}
 
 const shadowProperties = {
   shadowOpacity: true,
   shadowOffset: true,
   shadowRadius: true,
   elevation: true,
-};
+}
 
 const textShadowProperties = {
   textShadowOffset: true,
   textShadowRadius: true,
-};
+}
 
 export const backgroundColor = createRestyleFunction({
   property: 'backgroundColor',
   themeKey: 'colors',
-});
+})
 
 export const backgroundColorShorthand = createRestyleFunction({
   property: 'bg',
   styleProperty: 'backgroundColor',
   themeKey: 'colors',
-});
+})
 
 export const color = [
   createRestyleFunction({
@@ -165,112 +167,108 @@ export const color = [
     property: 'textDecorationColor',
     themeKey: 'colors',
   }),
-];
+]
 
 export const opacity = createRestyleFunction({
   property: 'opacity',
-});
+})
 
 export const visible = createRestyleFunction({
   property: 'visible',
   styleProperty: 'display',
-  transform: ({value}) => (value === false ? 'none' : 'flex'),
-});
+  transform: ({ value }) => (value === false ? 'none' : 'flex'),
+})
 
 export const spacing = getKeys(spacingProperties).map(property => {
   return createRestyleFunction({
     property,
     themeKey: 'spacing',
-  });
-});
+  })
+})
 
-export const spacingShorthand = getKeys(spacingPropertiesShorthand).map(
-  property => {
-    const styleProperty = spacingPropertiesShorthand[
-      property
-    ] as RNStyleProperty;
+export const spacingShorthand = getKeys(spacingPropertiesShorthand).map(property => {
+  const styleProperty = spacingPropertiesShorthand[property] as RNStyleProperty
 
-    return createRestyleFunction({
-      property,
-      styleProperty,
-      themeKey: 'spacing',
-    });
-  },
-);
+  return createRestyleFunction({
+    property,
+    styleProperty,
+    themeKey: 'spacing',
+  })
+})
 
 export const typography = [
   ...getKeys(typographyProperties).map(property => {
     return createRestyleFunction({
       property,
-    });
+    })
   }),
   createRestyleFunction({
     property: 'fontFamily',
     themeKey: 'fonts',
   }),
-];
+]
 
 export const layout = getKeys(layoutProperties).map(property => {
   return createRestyleFunction({
     property,
-  });
-});
+  })
+})
 
 export const position = [
   ...getKeys(positionProperties).map(property => {
     return createRestyleFunction({
       property,
-    });
+    })
   }),
   createRestyleFunction({
     property: 'zIndex',
     themeKey: 'zIndices',
   }),
-];
+]
 
 export const border = [
   ...getKeys(borderProperties).map(property => {
     return createRestyleFunction({
       property,
-    });
+    })
   }),
   ...getKeys(borderColorProperties).map(property => {
     return createRestyleFunction({
       property,
       themeKey: 'colors',
-    });
+    })
   }),
   ...getKeys(borderRadiusProperties).map(property => {
     return createRestyleFunction({
       property,
       themeKey: 'borderRadii',
-    });
+    })
   }),
-];
+]
 
 export const shadow = [
   ...getKeys(shadowProperties).map(property => {
     return createRestyleFunction({
       property,
-    });
+    })
   }),
   createRestyleFunction({
     property: 'shadowColor',
     themeKey: 'colors',
   }),
-];
+]
 
 export const textShadow = [
   ...getKeys(textShadowProperties).map(property => {
     return createRestyleFunction({
       property,
-    });
+    })
   }),
   createRestyleFunction({
     property: 'textShadowColor',
     themeKey: 'colors',
   }),
-];
+]
 
 export const all = [
   color,
@@ -285,116 +283,74 @@ export const all = [
   ...border,
   ...shadow,
   ...textShadow,
-];
+]
 
 export interface ColorProps<Theme extends BaseTheme> {
-  color?: ResponsiveValue<keyof Theme['colors'], Theme['breakpoints']>;
-  textDecorationColor?: ResponsiveValue<
-    keyof Theme['colors'],
-    Theme['breakpoints']
-  >;
+  color?: ResponsiveValue<keyof Theme['colors'], Theme['breakpoints']>
+  textDecorationColor?: ResponsiveValue<keyof Theme['colors'], Theme['breakpoints']>
 }
 export interface OpacityProps<Theme extends BaseTheme> {
-  opacity?: ResponsiveValue<number, Theme['breakpoints']>;
+  opacity?: ResponsiveValue<number, Theme['breakpoints']>
 }
 
 export interface VisibleProps<Theme extends BaseTheme> {
-  visible?: ResponsiveValue<boolean, Theme['breakpoints']>;
+  visible?: ResponsiveValue<boolean, Theme['breakpoints']>
 }
 
 export interface BackgroundColorProps<Theme extends BaseTheme> {
-  backgroundColor?: ResponsiveValue<
-    keyof Theme['colors'],
-    Theme['breakpoints']
-  >;
+  backgroundColor?: ResponsiveValue<keyof Theme['colors'] | string, Theme['breakpoints']>
 }
 
 export interface BackgroundColorShorthandProps<Theme extends BaseTheme> {
-  bg?: ResponsiveValue<keyof Theme['colors'], Theme['breakpoints']>;
+  bg?: ResponsiveValue<keyof Theme['colors'], Theme['breakpoints']>
 }
 
 export type SpacingProps<Theme extends BaseTheme> = {
-  [Key in keyof typeof spacingProperties]?: ResponsiveValue<
-    keyof Theme['spacing'],
-    Theme['breakpoints']
-  >;
-};
+  [Key in keyof typeof spacingProperties]?: ResponsiveValue<keyof Theme['spacing'], Theme['breakpoints']>
+}
 
 export type SpacingShorthandProps<Theme extends BaseTheme> = {
-  [Key in keyof typeof spacingPropertiesShorthand]?: ResponsiveValue<
-    keyof Theme['spacing'],
-    Theme['breakpoints']
-  >;
-};
+  [Key in keyof typeof spacingPropertiesShorthand]?: ResponsiveValue<keyof Theme['spacing'], Theme['breakpoints']>
+}
 
 export type TypographyProps<Theme extends BaseTheme> = {
-  [Key in keyof typeof typographyProperties]?: ResponsiveValue<
-    TextStyle[Key],
-    Theme['breakpoints']
-  >;
+  [Key in keyof typeof typographyProperties]?: ResponsiveValue<TextStyle[Key], Theme['breakpoints']>
 } & {
-  fontFamily?: ResponsiveValue<
-    Theme['fonts'] extends object ? keyof Theme['fonts'] : string,
-    Theme['breakpoints']
-  >;
-};
+  fontFamily?: ResponsiveValue<Theme['fonts'] extends object ? keyof Theme['fonts'] : string, Theme['breakpoints']>
+}
 
 export type LayoutProps<Theme extends BaseTheme> = {
-  [Key in keyof typeof layoutProperties]?: ResponsiveValue<
-    FlexStyle[Key],
-    Theme['breakpoints']
-  >;
-};
+  [Key in keyof typeof layoutProperties]?: ResponsiveValue<FlexStyle[Key], Theme['breakpoints']>
+}
 
 export type PositionProps<Theme extends BaseTheme> = {
-  [Key in keyof typeof positionProperties]?: ResponsiveValue<
-    FlexStyle[Key],
-    Theme['breakpoints']
-  >;
+  [Key in keyof typeof positionProperties]?: ResponsiveValue<FlexStyle[Key], Theme['breakpoints']>
 } & {
-  zIndex?: ResponsiveValue<
-    Theme['zIndices'] extends object ? keyof Theme['zIndices'] : number,
-    Theme['breakpoints']
-  >;
-};
+  zIndex?: ResponsiveValue<Theme['zIndices'] extends object ? keyof Theme['zIndices'] : number, Theme['breakpoints']>
+}
 
 export type BorderProps<Theme extends BaseTheme> = {
-  [Key in keyof typeof borderProperties]?: ResponsiveValue<
-    ViewStyle[Key],
-    Theme['breakpoints']
-  >;
+  [Key in keyof typeof borderProperties]?: ResponsiveValue<ViewStyle[Key], Theme['breakpoints']>
 } & {
-  [Key in keyof typeof borderColorProperties]?: ResponsiveValue<
-    keyof Theme['colors'],
-    Theme['breakpoints']
-  >;
+  [Key in keyof typeof borderColorProperties]?: ResponsiveValue<keyof Theme['colors'], Theme['breakpoints']>
 } & {
   [Key in keyof typeof borderRadiusProperties]?: ResponsiveValue<
     Theme['borderRadii'] extends object ? keyof Theme['borderRadii'] : number,
     Theme['breakpoints']
-  >;
-};
+  >
+}
 
 export type ShadowProps<Theme extends BaseTheme> = {
-  [Key in keyof typeof shadowProperties]?: ResponsiveValue<
-    ViewStyle[Key],
-    Theme['breakpoints']
-  >;
+  [Key in keyof typeof shadowProperties]?: ResponsiveValue<ViewStyle[Key], Theme['breakpoints']>
 } & {
-  shadowColor?: ResponsiveValue<keyof Theme['colors'], Theme['breakpoints']>;
-};
+  shadowColor?: ResponsiveValue<keyof Theme['colors'], Theme['breakpoints']>
+}
 
 export type TextShadowProps<Theme extends BaseTheme> = {
-  [Key in keyof typeof textShadowProperties]?: ResponsiveValue<
-    TextStyle[Key],
-    Theme['breakpoints']
-  >;
+  [Key in keyof typeof textShadowProperties]?: ResponsiveValue<TextStyle[Key], Theme['breakpoints']>
 } & {
-  textShadowColor?: ResponsiveValue<
-    keyof Theme['colors'],
-    Theme['breakpoints']
-  >;
-};
+  textShadowColor?: ResponsiveValue<keyof Theme['colors'], Theme['breakpoints']>
+}
 
 export type AllProps<Theme extends BaseTheme> = BackgroundColorProps<Theme> &
   BackgroundColorShorthandProps<Theme> &
@@ -407,4 +363,4 @@ export type AllProps<Theme extends BaseTheme> = BackgroundColorProps<Theme> &
   PositionProps<Theme> &
   BorderProps<Theme> &
   ShadowProps<Theme> &
-  TextShadowProps<Theme>;
+  TextShadowProps<Theme>

@@ -4,6 +4,9 @@ import composeRestyleFunctions from '../composeRestyleFunctions';
 const theme = {
   colors: {
     black: '#111111',
+    nested: {
+      red: 'red',
+    },
   },
   spacing: {
     m: 16,
@@ -28,6 +31,16 @@ describe('composeRestyleFunctions', () => {
       buildStyle({color: 'black', margin: 'm'}, {theme, dimensions}),
     ).toStrictEqual({
       color: '#111111',
+      margin: 16,
+    });
+  });
+
+  it('supports nested colors', () => {
+    const {buildStyle} = composeRestyleFunctions(restyleFunctions);
+    expect(
+      buildStyle({color: 'nested.red', margin: 'm'}, {theme, dimensions}),
+    ).toStrictEqual({
+      color: 'red',
       margin: 16,
     });
   });

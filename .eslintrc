@@ -1,39 +1,67 @@
 {
+  "root": true,
   "extends": [
-    "plugin:@shopify/typescript",
-    "plugin:@shopify/react",
-    "plugin:@shopify/jest",
-    "plugin:@shopify/prettier"
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended"
   ],
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "ecmaVersion": 6
+    "project": [
+      "./tsconfig.json"
+    ]
   },
+  "plugins": [
+    "react",
+    "react-hooks",
+    "@typescript-eslint",
+    "import"
+  ],
   "rules": {
-    "import/extensions": "off",
-    "jsx-a11y/control-has-associated-label": "off",
-    "node/no-extraneous-require": "off",
-    "import/no-cycle": "off",
-    "jest/require-tothrow-message": "off",
-    "callback-return": "off",
-    "jest/no-if": "off",
-    "import/named": "off",
-    "func-style": "off",
-    "react/display-name": "off",
-    "id-length": "off",
-    "@shopify/restrict-full-import": ["error", "lodash"],
-    "no-process-env": "off",
-    "@shopify/jsx-no-hardcoded-content": "off",
-    "@typescript-eslint/naming-convention": [
-      "off",
+    "@typescript-eslint/strict-boolean-expressions": "off",
+    "@typescript-eslint/no-unused-vars": "warn",
+    "import/order": [
+      "warn",
       {
-        "selector": "typeParameter",
-        "format": ["PascalCase"],
-        "prefix": ["T"]
+        "newlines-between": "always",
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        },
+        "pathGroups": [
+          {
+            "pattern": "*(react-native|native-base)",
+            "group": "builtin",
+            "position": "before"
+          },
+          {
+            "pattern": "react",
+            "group": "builtin",
+            "position": "before"
+          }
+        ],
+        "pathGroupsExcludedImportTypes": [
+          "*(react-native|native-base)",
+          "react"
+        ],
+        "groups": [
+          "builtin",
+          "external",
+          [
+            "sibling",
+            "parent"
+          ],
+          "index",
+          "object"
+          // Then the rest: internal and external type
+        ]
       }
     ]
   },
-  "ignorePatterns": ["node_modules", "dist"],
-  "env": {
-    "node": true
-  }
+  "ignorePatterns": [
+    "src/**/*.test.ts",
+    "src/frontend/generated/*",
+    "dist/**/*",
+    "vite.config.ts",
+    "**/*.js"
+  ]
 }

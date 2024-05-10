@@ -6,6 +6,10 @@ export interface ResponsiveBaseTheme extends BaseTheme {
   };
 }
 
+export interface NestedColors {
+  [key: string]: string;
+}
+
 export type StyleTransformFunction<
   Theme extends BaseTheme,
   K extends keyof Theme | undefined,
@@ -33,7 +37,7 @@ export type SafeVariants<T> = Omit<T, keyof KnownBaseTheme>;
 
 export interface KnownBaseTheme {
   colors: {
-    [key: string]: string;
+    [key: string]: string | NestedColors;
   };
   spacing: {
     [key: string]: number | string;
